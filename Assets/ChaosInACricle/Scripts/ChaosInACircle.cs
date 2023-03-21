@@ -41,9 +41,6 @@ public class ChaosInACircle : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.R))
         {
-            float random = Random.Range(0f, 1f);
-            _material.SetFloat("_ColorDecay", random < 0.8f ? 0.002f : 0f);
-
             _numCircles = Random.Range(1, 30);
             _circleRadius = Random.Range(0.005f, 0.03f);
             _gravity = Random.Range(0.1f, 0.7f);
