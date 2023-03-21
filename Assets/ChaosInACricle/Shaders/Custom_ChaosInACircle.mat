@@ -32,7 +32,7 @@ Material:
     m_Floats:
     - _Aspect: 1
     - _ColorDecay: 0.002
-    - _NumCircles: 5
+    - _NumCircles: 8
     - _Smoothness: 0
     - _Threshold: 0
     - _Time: 0
