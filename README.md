@@ -1,5 +1,5 @@
 # Chaos in a circle
-Also hosted on [github](https://gubebra.itch.io/chaos-in-a-circle)
+Also hosted on [itch.io](https://gubebra.itch.io/chaos-in-a-circle)
 
 
 ![Alt text](https://img.itch.zone/aW1hZ2UvMTk3ODg0MS8xMTY0Njk2OC5naWY=/original/DF4Owz.gif)
