@@ -31,8 +31,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _Aspect: 1
-    - _ColorDecay: 0.002
-    - _NumCircles: 8
+    - _ColorDecay: 0.02
+    - _NumCircles: 10
     - _Smoothness: 0
     - _Threshold: 0
     - _Time: 0
