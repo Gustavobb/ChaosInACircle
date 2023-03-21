@@ -1,6 +1,15 @@
 # Chaos in a circle
+Also hosted on [github](https://gubebra.itch.io/chaos-in-a-circle)
+
+
+![Alt text](https://img.itch.zone/aW1hZ2UvMTk3ODg0MS8xMTY0Njk2OC5naWY=/original/DF4Owz.gif)
+![Alt text](https://img.itch.zone/aW1hZ2UvMTk3ODg0MS8xMTY0Njk0NS5naWY=/original/Sh8izL.gif)
+![Alt text](https://img.itch.zone/aW1hZ2UvMTk3ODg0MS8xMTY0Njk2MS5naWY=/original/xoOkpB.gif)
+
 ## Introduction
 This repository contains a short implementation of a mathematical representation of chaos, where circles bounce inside another circle. A small change in the initial conditions can cause the system to exhibit chaotic behavior after some time.
+
+All you see here is made with math and fragment shaders, meaning that no assets are needed.
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more information.
