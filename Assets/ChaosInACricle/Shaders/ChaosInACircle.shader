@@ -79,7 +79,7 @@ Shader "Custom/ChaosInACircle"
             fixed4 frag (v2f i) : SV_Target
             {
                 float4 circunference = DrawCircle(float2(0.5, 0.5), i.uv, _CircumferenceRadius.x, _CircumferenceRadius.y, float4(1, 1, 1, 1));
-                float4 prevColor = tex2D(_PrevFrame, float2(i.uv.x,  i.uv.y));
+                float4 prevColor = tex2D(_PrevFrame, float2(i.uv.x, 1 - i.uv.y));
                 float4 color = 0;
 
                 for (int k = 0; k < _NumCircles; k++)
