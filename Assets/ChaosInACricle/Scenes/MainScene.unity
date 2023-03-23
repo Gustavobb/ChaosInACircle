@@ -598,7 +598,7 @@ MonoBehaviour:
   _numCircles: 10
   _audioMaxCooldown: 0.04
   _gravity: 0.3
-  _mirrorY: 0
+  _mirrorY: 1
   _circleSeparation: 0.0001
   _initialXPos: 0.5
   _circleRadius: 0.01
