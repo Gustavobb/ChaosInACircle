@@ -8,6 +8,8 @@ Shader "Custom/ChaosInACircle"
         _Smoothness ("Smoothness", Range(0, 1)) = 0.01
         _ColorDecay ("Color Decay", Range(0, 1)) = 0.01
         _NumCircles ("Number of Circles", Range(0, 100)) = 0
+        _MirrorY ("Mirror", Range(0, 1)) = 1
+        _Reset ("Reset", Range(0, 1)) = 0
         [ShowAsVector2] _CircumferenceRadius ("Circumference Radius", vector) = (0.5, 0.505, 0, 0)
     }
     SubShader
@@ -46,9 +48,11 @@ Shader "Custom/ChaosInACircle"
             };
 
             float _Aspect;
+            float _MirrorY;
             float _Smoothness;
             float _ColorDecay;
             float _NumCircles;
+            float _Reset;
             float2 _CircumferenceRadius;
 
             float4 _Centers[100];
@@ -58,13 +62,13 @@ Shader "Custom/ChaosInACircle"
             sampler2D _PrevFrame;
             sampler2D _MainTex;
             
-            float4 DrawCircle(float2 cuv, float2 uv, float innerRadius, float outerRadius, float4 color)
+            float4 DrawCircle(float2 cuv, float2 uv, float innerRadius, float outerRadius, float4 color, float smoothness)
             {
                 float2 diff = uv - cuv;
                 diff.x *= _Aspect;
                 float dist = length(diff);
-                float alpha = smoothstep(outerRadius, outerRadius - _Smoothness, dist);
-                alpha -= smoothstep(innerRadius, innerRadius - _Smoothness, dist);
+                float alpha = smoothstep(outerRadius, outerRadius - smoothness, dist);
+                alpha -= smoothstep(innerRadius, innerRadius - smoothness, dist);
                 return color * alpha;
             }
 
@@ -78,20 +82,24 @@ Shader "Custom/ChaosInACircle"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float4 circunference = DrawCircle(float2(0.5, 0.5), i.uv, _CircumferenceRadius.x, _CircumferenceRadius.y, float4(1, 1, 1, 1));
-                float4 prevColor = tex2D(_PrevFrame, float2(i.uv.x, 1 - i.uv.y));
+                if (_Reset > 0) return 0;
+                float4 circunference = DrawCircle(float2(0.5, 0.5), i.uv, _CircumferenceRadius.x, _CircumferenceRadius.y, float4(1, 1, 1, 1), _Smoothness);
+                float uvy = _MirrorY == 0 ? i.uv.y : 1 - i.uv.y;
+                float4 prevColor = tex2D(_PrevFrame, float2(i.uv.x, uvy));
                 float4 color = 0;
 
                 for (int k = 0; k < _NumCircles; k++)
                 {
-                    float4 c = DrawCircle(_Centers[k], i.uv, 0, _Radius[k], _Colors[k]);
-                    color += c;
+                    float4 c = DrawCircle(_Centers[k], i.uv, 0, _Radius[k], _Colors[k], _Smoothness);
+                    
+                    if (length(color) == 0)
+                        color = c;
                 }
 
+                color += circunference;
                 if (length(color) == 0)
                     color = prevColor - _ColorDecay;
                     
-                color += circunference;
                 return saturate(color);
             }
             ENDCG
